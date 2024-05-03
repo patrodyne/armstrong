@@ -38,3 +38,8 @@ Enclosed is a solution to problem no. 58 . . . .
 
 implies \(b=b'\). Consequently there are an infinite number of *distinct* Armstrong numbers when one considers all counting bases simultaneously.
 
+<!-- References -->
+[1]: https://www.uucsr.org/people/jim-peters/
+[2]: mailto:jpeters@liu.edu
+[3]: https://github.com/patrodyne
+[4]: mailto:rick.osullivan@verizon.net
