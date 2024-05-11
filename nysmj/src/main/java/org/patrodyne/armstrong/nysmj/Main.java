@@ -1,6 +1,10 @@
 package org.patrodyne.armstrong.nysmj;
 
 import java.util.Map.Entry;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Properties;
 
 /**
@@ -10,6 +14,8 @@ import java.util.Properties;
  */
 public class Main
 {
+	private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
 	public static final String PROGRAM_NAME = "Main";
 	public static final String KEY_HELP = "HELP";
 	public static final String KEY_SOURCE = "SOURCE";
@@ -47,10 +53,10 @@ public class Main
 	private void execute(Properties options)
 	{
 		Command command = null;
-		switch ( options.getProperty(KEY_SOURCE_TYPE).toLowerCase() )
+		switch ( options.getProperty(KEY_SOURCE).toLowerCase() )
 		{
 			case "search":
-				switch ( options.getProperty(KEY_TARGET_TYPE).toLowerCase() )
+				switch ( options.getProperty(KEY_SOURCE_TYPE).toLowerCase() )
 				{
 					case "le10":
 						command = new SearchLE10();
@@ -157,6 +163,7 @@ public class Main
 		show(t.getClass().getSimpleName()+": "+t.getMessage()+", File="+top.getFileName()+", Line="+top.getLineNumber());
 		if ( t.getMessage().startsWith("Usage:") )
 			showUsage();
+		logger.debug("Stacktrace: ", t);
 	}
 
 	/**
@@ -225,6 +232,6 @@ public class Main
 	 */
 	public static void show(String text)
 	{
-		System.out.println(text);
+		logger.info(text);
 	}
 }

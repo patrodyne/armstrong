@@ -9,12 +9,80 @@
 	<artifactId>armstrong-nysmj</artifactId>
 	<packaging>jar</packaging>
 	<name>Patrodyne Armstrong - NYSMJ</name>
+
 	<properties>
 		<root.basedir>${basedir}/..</root.basedir>
+		<libdir>lib</libdir>
 	</properties>
+
 	<dependencies>
+
+		<!-- SLF4J Implementation -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
+
 	<build>
 		<defaultGoal>install</defaultGoal>
+
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeScope>runtime</includeScope>
+							<outputDirectory>${target}/${libdir}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>org.patrodyne.armstrong.nysmj.Main</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>${libdir}/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Created-By>Patrodyne</Created-By>
+							<Built-By>Patrodyne</Built-By>
+							<JVM-Release>${maven.compiler.release}</JVM-Release>
+							<url>https://github.com/patrodyne/armstrong/tree/master/</url>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>org.patrodyne.armstrong.nysmj.Main</mainClass>
+					<classpathScope>test</classpathScope>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
 	</build>
 </project>

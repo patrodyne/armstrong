@@ -93,6 +93,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<slf4j.version>2.0.12</slf4j.version>
 		<xmlunit.version>1.6</xmlunit.version>
+
+		<source>${basedir}/src</source>
+		<target>${project.build.directory}</target>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -247,6 +250,11 @@
 							</ignoreVersions>
 						</ruleSet>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${exec-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.felix</groupId>
