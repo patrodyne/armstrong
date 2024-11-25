@@ -53,6 +53,7 @@ public class Main
 	private void execute(Properties options)
 	{
 		Command command = null;
+		// java -jar armstrong-nysmj-1.0.0-SNAPSHOT.jar SOURCE=search SOURCETYPE=le10
 		switch ( options.getProperty(KEY_SOURCE).toLowerCase() )
 		{
 			case "search":
